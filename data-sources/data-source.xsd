@@ -1,0 +1,175 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="data-source">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>zero or more data-source types</xs:documentation>
+				</xs:annotation>
+				<xs:element name="literal-xml" type="xs:anyType"/>
+				<xs:element name="parameters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="xslt" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="tag" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="xml-from-application">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="xslt" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="file" type="xs:string" use="required"/>
+						<xs:attribute name="ignore-if-not-found" type="xs:boolean"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="xml-from-url">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="url" type="xs:string"/>
+							<xs:element name="method" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>default is GET</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="GET"/>
+										<xs:enumeration value="POST"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="get-parameter" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="request-header" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="basic-access-authentication" minOccurs="0">
+								<xs:complexType>
+									<xs:attribute name="username" type="xs:string" use="required"/>
+									<xs:attribute name="password" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:choice minOccurs="0">
+								<xs:element name="xml-body">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="xs:anyType">
+												<xs:attribute name="xslt-file" type="xs:string" use="required"/>
+												<xs:attribute name="upload-files" type="xs:boolean"/>
+												<xs:attribute name="expand-transformations" type="xs:boolean"/>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="json-body">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="xs:anyType">
+												<xs:attribute name="xslt-file" type="xs:string" use="required"/>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+							<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="xslt" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="tag" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="xml-from-database">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="jdbc-connection-string" minOccurs="0">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="from-environment-variable" type="xs:string"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="sql" type="xs:string"/>
+							<xs:element name="param" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="xslt" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="tag" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="application-introspection">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="xslt" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="on-demand-incrementing-number">
+					<xs:complexType>
+						<xs:attribute name="type" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="month"/>
+									<xs:enumeration value="year"/>
+									<xs:enumeration value="perpetual"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="post-process" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="xslt" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>path to a xslt-file (including file-extension) in data-source-post-processing-xslt directory</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,53 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="fop">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="renderers">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="renderer">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="fonts">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="font">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="font-triplet">
+																	<xs:complexType>
+																		<xs:attribute name="name" type="xs:string" use="required"/>
+																		<xs:attribute name="style" type="xs:string" use="required"/>
+																		<xs:attribute name="weight" type="xs:string" use="required"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="kerning" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="yes"/>
+																		<xs:enumeration value="no"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="embed-url" type="xs:string" use="required">
+																<xs:annotation>
+																	<xs:documentation>file-name of ttf font within font directory</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="mime" type="xs:string" use="required" fixed="application/pdf"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,57 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="transformer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="xslt-file" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>if omitted, the data-source will be returned without processing a transformation.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>path to xslt on data-source-xslt directory including file-extension</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:choice minOccurs="0">
+					<xs:element name="convert-output-xsl-fo-to-pdf">
+						<xs:annotation>
+							<xs:documentation>this option will send the generated xml to FOP processor</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="convert-output-xml-to-json">
+						<xs:annotation>
+							<xs:documentation>this option will convert generated xml into json</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="convert-output-xml-to-excel">
+						<xs:annotation>
+							<xs:documentation>this option expects output-type html containg a html table, which will be convered into a simple excel spreadsheet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:choice>
+				<xs:element name="content-type" minOccurs="0">
+					<xs:complexType>
+						<xs:attribute name="type" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>mime-type</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="placeholder" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="placeholder-name" type="xs:string" use="required"/>
+						<xs:attribute name="value" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="data-source" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>name of data-source without file-extension</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

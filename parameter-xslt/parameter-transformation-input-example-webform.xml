@@ -1,0 +1,32 @@
+<parameter-transformation-input>
+	<!-- This file shows the example input to a parameter-transformation. In this case input was submitted from a webform (POST or GET) -->
+	<input-from-request>
+		<endpoint>my-endpoint</endpoint>
+		<debug-requested/>
+		<!-- only present when debug=true; otherwise missing -->
+		<environment>preview</environment>
+		<hash>ed99c4d96dac277331f08216bf7227e10dab64edcd05d7e02ad4d090c22f369b</hash>
+		<http-header-user-agent>Mozilla/1.0N (Windows)</http-header-user-agent>
+		<http-header-referrer>https://..../</http-header-referrer>
+		<!-- only present when IP address was available; otherwise missing -->
+		<ip-address>1.2.3.4</ip-address>
+		<!-- list of all parameters submitted or - if not submitted - having default-value from endpoints.xml -->
+		<parameter name="some" value="some value"/>
+		<parameter name="more" value="some other value"/>
+		<parameter name="examples" value="and so on"/>		
+	</input-from-request>
+	<input-from-application>
+		<application>application-name</application>
+		<application-display-name>The Application</application-display-name>
+		<!-- or missing, if not available -->
+		<debug-allowed/>
+		<!-- only present when debug-mode enabled in service portal; otherwise missing -->
+		<secret-key>foo</secret-key>
+		<!-- if you have multiple secret keys, then all of them will be listed -->
+		<incremental-id-per-endpoint>1345</incremental-id-per-endpoint>
+		<random-id-per-application>8764598230</random-id-per-application>
+		<base-url>https://endpoints.com/</base-url>
+	</input-from-application>
+	<!-- You can add any additional data-sources with the parameter-trasformation element. Data from those will be available below. -->
+	<whatever-the-data-source-command-returns/>
+</parameter-transformation-input>

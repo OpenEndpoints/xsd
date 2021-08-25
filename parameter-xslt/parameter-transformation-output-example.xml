@@ -1,0 +1,12 @@
+<parameter-transformation-output>
+
+	<!-- The error tag is optional. If it is present, an error will be raised. -->
+	<error>The error text that shall be displayed.</error>
+	
+	<!-- The parameters in this list must exist in the endpoints.xml !!! -->
+	<!-- Note that the parameter names passed to the endpoint may be completely different from the parameter names below. -->
+	<parameter name="parameter-name-1" value="xxx"/>
+	<parameter name="parameter-name-2" value="yyy"/>
+	<parameter name="parameter-name-3" value="zzz"/>
+	
+</parameter-transformation-output>

@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="parameter-transformation-output">
+		<xs:annotation>
+			<xs:documentation>Your parameter transformation XSLT shall generate an xml file matching this schema. The software will then catch the values from the output und use them as parameter-values.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="error" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The error tag is optional. If it is present, an error will be raised, showing the error message in ${parameter-transformation-error-text}. If the tag is present but empty, an error will be raised, but without having an error message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="parameter" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="required"/>
+						<xs:attribute name="value" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
